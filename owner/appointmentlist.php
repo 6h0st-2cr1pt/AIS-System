@@ -133,8 +133,10 @@ if (isset($_GET['delete'])) {
             <!-- Appointment List -->
             <div class="col-mb-4 mt-3">
                 <div class="card" style="height: 97vh;">
+                    <div class="card-header">
+                        <h5>Appointment List</h5>
+                    </div>
                     <div class="card-body">
-                        <h5 class="card-title">Appointment List</h5>
                         <div class="table-responsive">
                             <table class="table table-striped table-sm">
                                 <thead>
@@ -145,7 +147,7 @@ if (isset($_GET['delete'])) {
                                         <th>Address</th>  <!-- New Column -->
                                         <th>Service</th>
                                         <th>Date</th>
-                                        <!-- Removed Actions Column -->
+                                
                                     </tr>
                                 </thead>
                                 <tbody>

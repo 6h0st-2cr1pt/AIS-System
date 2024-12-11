@@ -106,7 +106,7 @@ if ($next_month == 13) {
         .calendar {
             background-color: #295F98;
             border-radius: 5px;
-            padding: 20px;
+            padding: 0px;
         }
         .calendar .table td {
             height: 100px;
@@ -122,6 +122,7 @@ if ($next_month == 13) {
             align-items: center;
             margin-bottom: 20px;
         }
+        
     </style>
 </head>
 <body>
@@ -156,7 +157,6 @@ if ($next_month == 13) {
                     <img class="me-2" src="../icons/bxs-report.svg" alt="Reports" style="width: 30px; height: auto; filter: invert(1);">General Reports
                 </a>
             </li>
-
         </ul>
         <a class="nav-link mt-auto mb-3 p-2" href="../logout.php">
             <img class="me-2" src="../icons/bx-log-out.svg" alt="Logout" style="width: 30px; height: auto; filter: invert(1);">Logout
@@ -166,7 +166,10 @@ if ($next_month == 13) {
     <div class="row">
         <!-- Main content -->
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"><br>
-            <div class="card calendar">
+            <div class="card calendar" style=" height: 97vh;">
+                <div class="card-header">
+                    <h5>Appointment Calendar</h5>
+                </div>
                 <div class="card-body">
                     <div class="month-nav">
                         <a href="?month=<?php echo $prev_month; ?>&year=<?php echo $prev_year; ?>" class="btn btn-primary">&lt; Previous</a>
