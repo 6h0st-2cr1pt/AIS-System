@@ -20,7 +20,7 @@ if ($conn->connect_error) {
 $success_message = $error_message = '';
 
 // Fetch appointments
-$sql = "SELECT * FROM appointments ORDER BY appointment_date DESC";
+$sql = "SELECT owner_name, pet_name, pet_type, home_address, service_type, appointment_date FROM appointments ORDER BY appointment_date DESC";
 $result = $conn->query($sql);
 
 // Delete appointment
@@ -91,94 +91,92 @@ if (isset($_GET['delete'])) {
 </head>
 <body>
 <nav class="sidebar d-flex flex-column" id="sidebar"> 
-        <div class="sidebar-header mt-0 p-2" style="background-color:#295F98;">
-            <h3 class="text-center">AIS System</h3>
-        </div><br>
-        <h4 class="text-center">Owner</h4>
-        <ul class="nav flex-column flex-grow-1 mt-3" style="font-size: 18px;">
-            <li class="nav-item">
-                <a class="nav-link" href="dashboard.php">
-                    <img class="me-2" src="../icons/bxs-dashboard.svg" alt="Dashboard" style="width: 30px; height: auto; filter: invert(1);">Dashboard
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="calendar.php">
-                    <img class="me-2" src="../icons/bxs-calendar.svg" alt="Inventory" style="width: 30px; height: auto; filter: invert(1);">Calendar
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="appointmentlist.php">
-                    <img class="me-2" src="../icons/bxs-spreadsheet.svg" alt="Appointments" style="width: 30px; height: auto; filter: invert(1);">Appointment List
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="inventorylist.php">
-                    <img class="me-2" src="../icons/bxs-notepad.svg" alt="Appointments" style="width: 30px; height: auto; filter: invert(1);">Inventory List
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="generalreports.php">
-                    <img class="me-2" src="../icons/bxs-report.svg" alt="Reports" style="width: 30px; height: auto; filter: invert(1);">General Reports
-                </a>
-            </li>
-
-        </ul>
-        <a class="nav-link mt-auto mb-3 p-2" href="../logout.php">
-            <img class="me-2" src="../icons/bx-log-out.svg" alt="Logout" style="width: 30px; height: auto; filter: invert(1);">Logout
-        </a>
-    </nav>
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Main content -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                    <!-- Appointment List -->
-                    <div class="col-mb-4 mt-3">
-                        <div class="card" style="height: 97vh;">
-                            <div class="card-body">
-                                <h5 class="card-title">Appointment List</h5>
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-sm">
-                                        <thead>
-                                            <tr>
-                                                <th>Owner</th>
-                                                <th>Pet</th>
-                                                <th>Service</th>
-                                                <th>Date</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            if ($result->num_rows > 0) {
-                                                while($row = $result->fetch_assoc()) {
-                                                    echo "<tr>";
-                                                    echo "<td>" . htmlspecialchars($row["owner_name"]) . "</td>";
-                                                    echo "<td>" . htmlspecialchars($row["pet_name"]) . "</td>";
-                                                    echo "<td>" . htmlspecialchars($row["service_type"]) . "</td>";
-                                                    echo "<td>" . htmlspecialchars($row["appointment_date"]) . "</td>";
-                                                    echo "<td>
-                                                            <a href='edit_appointment.php?id=" . $row["id"] . "' class='btn btn-sm btn-primary'>Edit</a>
-                                                            <a href='appointment.php?delete=" . $row["id"] . "' class='btn btn-sm btn-danger' onclick='return confirm(\"Are you sure you want to delete this appointment?\")'>Delete</a>
-                                                          </td>";
-                                                    echo "</tr>";
-                                                }
-                                            } else {
-                                                echo "<tr><td colspan='5'>No appointments found</td></tr>";
-                                            }
-                                            ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+    <div class="sidebar-header mt-0 p-2" style="background-color:#295F98;">
+        <h3 class="text-center">AIS System</h3>
+    </div><br>
+    <h4 class="text-center">Owner</h4>
+    <ul class="nav flex-column flex-grow-1 mt-3" style="font-size: 18px;">
+        <li class="nav-item">
+            <a class="nav-link" href="dashboard.php">
+                <img class="me-2" src="../icons/bxs-dashboard.svg" alt="Dashboard" style="width: 30px; height: auto; filter: invert(1);">Dashboard
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="calendar.php">
+                <img class="me-2" src="../icons/bxs-calendar.svg" alt="Inventory" style="width: 30px; height: auto; filter: invert(1);">Calendar
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="appointmentlist.php">
+                <img class="me-2" src="../icons/bxs-spreadsheet.svg" alt="Appointments" style="width: 30px; height: auto; filter: invert(1);">Appointment List
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="inventorylist.php">
+                <img class="me-2" src="../icons/bxs-notepad.svg" alt="Appointments" style="width: 30px; height: auto; filter: invert(1);">Inventory List
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="generalreports.php">
+                <img class="me-2" src="../icons/bxs-report.svg" alt="Reports" style="width: 30px; height: auto; filter: invert(1);">General Reports
+            </a>
+        </li>
+    </ul>
+    <a class="nav-link mt-auto mb-3 p-2" href="../logout.php">
+        <img class="me-2" src="../icons/bx-log-out.svg" alt="Logout" style="width: 30px; height: auto; filter: invert(1);">Logout
+    </a>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Main content -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <!-- Appointment List -->
+            <div class="col-mb-4 mt-3">
+                <div class="card" style="height: 97vh;">
+                    <div class="card-body">
+                        <h5 class="card-title">Appointment List</h5>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Owner</th>
+                                        <th>Pet</th>
+                                        <th>Pet Type</th> <!-- New Column -->
+                                        <th>Address</th>  <!-- New Column -->
+                                        <th>Service</th>
+                                        <th>Date</th>
+                                        <!-- Removed Actions Column -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    if ($result->num_rows > 0) {
+                                        while($row = $result->fetch_assoc()) {
+                                            echo "<tr>";
+                                            echo "<td>" . htmlspecialchars($row["owner_name"]) . "</td>";
+                                            echo "<td>" . htmlspecialchars($row["pet_name"]) . "</td>";
+                                            echo "<td>" . htmlspecialchars($row["pet_type"]) . "</td>"; // New Data
+                                            echo "<td>" . htmlspecialchars($row["home_address"]) . "</td>"; // New Data
+                                            echo "<td>" . htmlspecialchars($row["service_type"]) . "</td>";
+                                            echo "<td>" . htmlspecialchars($row["appointment_date"]) . "</td>";
+                                            // Removed Action Button
+                                            echo "</tr>";
+                                        }
+                                    } else {
+                                        echo "<tr><td colspan='6'>No appointments found</td></tr>";
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-            </main>
-        </div>
+            </div>
+        </main>
     </div>
+</div>
 
-    <script src="../js/bootstrap.bundle.min.js"></script>
-    <script src="list.js"></script>
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script src="list.js"></script>
 </body>
 </html>
-

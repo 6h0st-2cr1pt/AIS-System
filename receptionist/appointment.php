@@ -338,7 +338,6 @@ if (isset($_GET['edit'])) {
                                                     echo "<td>" . htmlspecialchars($row["service_type"]) . "</td>";
                                                     echo "<td>" . htmlspecialchars($row["appointment_date"]) . "</td>";
                                                     echo "<td>
-                                                            <button class='btn btn-sm btn-primary edit-btn' data-bs-toggle='modal' data-bs-target='#editAppointmentModal' data-id='" . $row["id"] . "'>Edit</button>
                                                             <a href='appointment.php?delete=" . $row["id"] . "' class='btn btn-sm btn-danger' onclick='return confirm(\"Are you sure you want to delete this appointment?\")'>Delete</a>
                                                           </td>";
                                                     echo "</tr>";
@@ -359,98 +358,6 @@ if (isset($_GET['edit'])) {
 
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="appoint.js"></script>
-
-    <!-- Edit Appointment Modal -->
-<div class="modal fade" id="editAppointmentModal" tabindex="-1" aria-labelledby="editAppointmentModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editAppointmentModalLabel">Edit Appointment</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="editAppointmentForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-                    <input type="hidden" id="edit_id" name="edit_id">
-                    <div class="mb-3">
-                        <label for="edit_owner_name" class="form-label">Owner's Name</label>
-                        <input type="text" class="form-control" id="edit_owner_name" name="owner_name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="edit_contact_number" class="form-label">Contact Number</label>
-                        <input type="tel" class="form-control" id="edit_contact_number" name="contact_number" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="edit_email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="edit_email" name="email" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="edit_home_address" class="form-label">Home Address</label>
-                        <input type="text" class="form-control" id="edit_home_address" name="home_address" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="edit_pet_name" class="form-label">Pet Name</label>
-                        <input type="text" class="form-control" id="edit_pet_name" name="pet_name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Pet Type</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="pet_type" id="edit_pet_type_cat" value="Cat" required>
-                                <label class="form-check-label" for="edit_pet_type_cat">Cat</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="pet_type" id="edit_pet_type_dog" value="Dog">
-                                <label class="form-check-label" for="edit_pet_type_dog">Dog</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="pet_type" id="edit_pet_type_other" value="Other">
-                                <label class="form-check-label" for="edit_pet_type_other">Other</label>
-                            </div>
-                        </div>
-                        <input type="text" class="form-control mt-2" id="edit_pet_type_other_specify" name="pet_type_other" placeholder="Please specify">
-                    </div>
-                    <div class="mb-3">
-                        <label for="edit_breed" class="form-label">Breed</label>
-                        <input type="text" class="form-control" id="edit_breed" name="breed" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="edit_age" class="form-label">Age</label>
-                        <input type="number" class="form-control" id="edit_age" name="age" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Service Type</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="service_type" id="edit_service_type_surgery" value="Surgery" required>
-                                <label class="form-check-label" for="edit_service_type_surgery">Surgery</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="service_type" id="edit_service_type_checkup" value="Check Up">
-                                <label class="form-check-label" for="edit_service_type_checkup">Check Up</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="service_type" id="edit_service_type_grooming" value="Grooming">
-                                <label class="form-check-label" for="edit_service_type_grooming">Grooming</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="service_type" id="edit_service_type_vaccination" value="Vaccination">
-                                <label class="form-check-label" for="edit_service_type_vaccination">Vaccination</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="edit_appointment_date" class="form-label">Appointment Date</label>
-                        <input type="date" class="form-control" id="edit_appointment_date" name="appointment_date" required>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveEditBtn">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
 </body>
 </html>
 
