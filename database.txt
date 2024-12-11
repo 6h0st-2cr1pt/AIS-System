@@ -1,0 +1,44 @@
+NAME OF DATABASE appoint_db
+
+CREATE TABLE `appointments` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `owner_name` VARCHAR(100) NOT NULL,
+  `contact_number` VARCHAR(20) NOT NULL,
+  `email` VARCHAR(100) NOT NULL,
+  `home_address` TEXT NOT NULL,
+  `pet_name` VARCHAR(50) NOT NULL,
+  `pet_type` ENUM('Cat', 'Dog', 'Other') NOT NULL,
+  `pet_type_other` VARCHAR(50),
+  `breed` VARCHAR(50) NOT NULL,
+  `age` INT NOT NULL,
+  `service_type` ENUM('Surgery', 'Check Up', 'Grooming', 'Vaccination') NOT NULL,
+  `appointment_date` DATE NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+
+NAME OF DATABASE inv_db
+
+CREATE TABLE items (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  category ENUM('Food', 'Hygiene', 'Accessories', 'Vaccine', 'Medicine') NOT NULL,
+  quantity INT NOT NULL,
+  unit_price DECIMAL(10, 2) NOT NULL,
+  expiration_date DATE,
+  number_of_damage INT DEFAULT 0 
+);
+
+CREATE TABLE supplies (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    item_id INT NOT NULL,
+    quantity INT NOT NULL,
+    supplier VARCHAR(255) NOT NULL,
+    order_date DATE NOT NULL,
+    expected_delivery DATE NOT NULL,
+    received_quantity INT,
+    received_date DATE,
+    FOREIGN KEY (item_id) REFERENCES items(id)
+);
